@@ -1,0 +1,1 @@
+INSERT INTO food(id, name, restaurantName, price) VALUES (nextval('hibernate_sequence'), 'Apple', 'Fruit Bistro', 2.99);
