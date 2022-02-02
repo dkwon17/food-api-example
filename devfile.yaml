@@ -14,10 +14,10 @@ components:
           protocol: tcp
           targetPort: 5005
         - exposure: public
-          name: hello-greeting-endpoint
+          name: list-all-food
           protocol: http
           targetPort: 8080
-          path: /hello/greeting/che-user
+          path: /food
       volumeMounts:
         - name: m2
           path: /home/user/.m2
@@ -31,6 +31,17 @@ components:
       args: ['-f', '/dev/null']
       memoryLimit: 64M
       mountSources: true
+
+  - name: postgresql
+    container:
+      image: postgres:13.3
+      env:
+        - name: POSTGRES_USER
+          value: user
+        - name: POSTGRES_PASSWORD
+          value: password
+        - name: POSTGRES_DB
+          value: food_db
 
   - name: m2
     volume:
@@ -66,6 +77,6 @@ commands:
       label: "Start Native"
       component: ubi-minimal
       workingDir: ${PROJECTS_ROOT}/food-api-example/target
-      commandLine: "./getting-started-1.0.0-SNAPSHOT-runner"
+      commandLine: "./food-api-example-1.0.0-SNAPSHOT-runner"
       group:
         kind: run
