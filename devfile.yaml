@@ -42,6 +42,8 @@ components:
           value: password
         - name: POSTGRES_DB
           value: food_db
+        - name: PGDATA
+          value: /tmp/pgdata
 
   - name: m2
     volume:
@@ -49,12 +51,21 @@ components:
 commands:
   - id: package
     exec:
+      label: "Package"
       component: tools
       workingDir: ${PROJECTS_ROOT}/food-api-example
       commandLine: "./mvnw package"
       group:
         kind: build
         isDefault: true
+  - id: runtests
+    exec:
+      label: "Run tests"
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/food-api-example
+      commandLine: "./mvnw test"
+      group:
+        kind: test
   - id: packagenative
     exec:
       label: "Package Native"

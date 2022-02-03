@@ -1,4 +1,4 @@
-package org.food;
+package org.example.food;
 
 import java.net.URI;
 import java.util.List;
@@ -13,14 +13,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import io.quarkus.panache.common.Sort;
+
 @Path("/food")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class FoodResource {
-    
+
     @GET
     public List<Food> list() {
-        return Food.listAll();
+        return Food.listAll(Sort.by("name"));
     }
 
     @GET
@@ -42,6 +44,6 @@ public class FoodResource {
     @GET
     @Path("search/{name}")
     public Food getByName(@PathParam("name") String name) {
-        return Food.findByName(name);
+        return Food.find("name", name).firstResult();
     }
 }
