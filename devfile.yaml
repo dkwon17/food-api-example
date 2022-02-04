@@ -46,6 +46,19 @@ components:
     type: dockerimage
     alias: ubi-minimal
     image: registry.access.redhat.com/ubi8/ubi-minimal
+  - memoryLimit: 512Mi
+    type: dockerimage
+    image: postgres:13.3
+    alias: postgres
+    env:
+      - name: POSTGRES_USER
+        value: user
+      - name: POSTGRES_PASSWORD
+        value: password
+      - name: POSTGRES_DB
+        value: food_db
+      - name: PGDATA
+        value: /tmp/pgdata
 commands:
   - name: Package
     actions:
