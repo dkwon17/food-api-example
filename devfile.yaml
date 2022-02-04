@@ -1,6 +1,6 @@
 apiVersion: 1.0.0
 metadata:
-  name: food-api-example
+  name: food-api-example-
 components:
   - id: redhat/quarkus-java11/latest
     type: chePlugin
@@ -78,18 +78,6 @@ commands:
         type: exec
         command: './mvnw test'
         component: centos-quarkus-maven
-  - name: Package Native
-    actions:
-      - workdir: '${CHE_PROJECTS_ROOT}/food-api-example'
-        type: exec
-        command: ./mvnw package -Dnative -Dmaven.test.skip -Dquarkus.native.native-image-xmx=2G
-        component: centos-quarkus-maven
-  - name: Start Native
-    actions:
-      - workdir: '${CHE_PROJECTS_ROOT}/food-api-example/target'
-        type: exec
-        command: ./food-api-example-1.0.0-SNAPSHOT-runner
-        component: ubi-minimal
   - name: Attach remote debugger
     actions:
       - referenceContent: |
