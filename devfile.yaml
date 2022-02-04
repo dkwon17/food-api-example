@@ -5,6 +5,8 @@ components:
   - id: redhat/quarkus-java11/latest
     type: chePlugin
     registryUrl: 'https://eclipse-che.github.io/che-plugin-registry/7.42.0/v3/'
+  - id: ms-vscode/vscode-github-pullrequest/latest
+    type: chePlugin
   - mountSources: true
     endpoints:
       - attributes:
@@ -29,21 +31,21 @@ components:
         name: QUARKUS_HTTP_HOST
       - value: '-XX:MaxRAMPercentage=50.0 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom -Duser.home=/home/user'
         name: JAVA_OPTS
-  # - mountSources: true
-  #   endpoints:
-  #     - attributes:
-  #         path: /food
-  #       name: list-all-food
-  #       port: 8080
-  #   command:
-  #     - tail
-  #   args:
-  #     - '-f'
-  #     - /dev/null
-  #   memoryLimit: 32M
-  #   type: dockerimage
-  #   alias: ubi-minimal
-  #   image: registry.access.redhat.com/ubi8/ubi-minimal
+  - mountSources: true
+    endpoints:
+      - attributes:
+          path: /food
+        name: list-all-food
+        port: 8080
+    command:
+      - tail
+    args:
+      - '-f'
+      - /dev/null
+    memoryLimit: 32M
+    type: dockerimage
+    alias: ubi-minimal
+    image: registry.access.redhat.com/ubi8/ubi-minimal
 commands:
   - name: Package
     actions:
