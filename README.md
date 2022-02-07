@@ -3,6 +3,8 @@
 
 Quarkus REST API with Hibernate ORM, Panache, RESTEasy, and PostgreSQL.
 
+Hello world!
+
 ## Endpoints
 ```
 GET  /food                  Lists all Food resources
